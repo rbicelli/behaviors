@@ -113,6 +113,7 @@ class PluginBehaviorsConfig extends CommonDBTM {
                      `is_tickettasktodo` tinyint NOT NULL default '0',
                      `is_problemtasktodo` tinyint NOT NULL default '0',
                      `is_changetasktodo` tinyint NOT NULL default '0',
+                     `show_child_groups_items` tinyint NOT NULL default '0',
                      `date_mod` timestamp NULL DEFAULT NULL,
                      `comment` text,
                      PRIMARY KEY  (`id`)
@@ -222,6 +223,10 @@ class PluginBehaviorsConfig extends CommonDBTM {
 
          //version 2.7.0
          $mig->changeField($table, 'date_mod', 'date_mod', "timestamp NULL DEFAULT NULL");
+         
+         //version ?
+         $mig->addField($table, 'show_child_groups_items', 'bool', ['after' => 'is_changetasktodo']);
+         
       }
 
    }
@@ -314,7 +319,7 @@ class PluginBehaviorsConfig extends CommonDBTM {
       Dropdown::showYesNo("is_ticketrealtime_mandatory",
                           $config->fields['is_ticketrealtime_mandatory']);
       echo "</td><th colspan=2' class='center'>".__('Update of a problem');
-      echo "</th></tr>";
+      echo "</th></tr>";      
 
       echo "<tr class='tab_bg_1'>";
       echo "<td>".__('Category is mandatory before ticket is solved/closed', 'behaviors')."</td><td>";
@@ -381,7 +386,7 @@ class PluginBehaviorsConfig extends CommonDBTM {
       echo "<td>".__("Use the technician's group", "behaviors")."</td><td>";
       Dropdown::showFromArray('use_assign_user_group_update', $yesnoall,
                               ['value' => $config->fields['use_assign_user_group_update']]);
-      echo "</td><th colspan='2' class='center'>".__('Comments');
+      echo "</td><th colspan='2' class='center'>".__('General');
       echo "</th></tr>\n";
 
       echo "<tr class='tab_bg_1'>";
@@ -389,23 +394,32 @@ class PluginBehaviorsConfig extends CommonDBTM {
       echo "</td><td>";
       Dropdown::showYesNo("is_ticketlocation_mandatory",
                            $config->fields['is_ticketlocation_mandatory']);
-      echo "<td rowspan='7' colspan='2' class='center'>";
-      Html::textarea(['name'            => 'comment',
-                      'value'           => $config->fields['comment'],
-                      'cols'            => '60',
-                      'rows'            => '12',
-                      'enable_ricktext' => false]);
-      echo "</td></tr>";
+      echo "</td>";
+
+      echo "<td>".__('Show Items of child Groups', 'behaviors');
+      echo "</td><td>";
+      Dropdown::showYesNo("show_child_groups_items",
+                           $config->fields['show_child_groups_items']);
+      echo "</td></tr>";      
 
       echo "<tr class='tab_bg_1'>";
       echo "<td>".__('Task category is mandatory in a task', 'behaviors')."</td><td>";
       Dropdown::showYesNo("is_tickettaskcategory_mandatory",
       $config->fields['is_tickettaskcategory_mandatory']);
-      echo "</td></tr>";
+      echo "</td><th colspan='2' class='center'>".__('Comments');
+      echo "</th></tr>\n";
 
       echo "<tr class='tab_bg_1'>";
       echo "<td>".__("Deny change of ticket's creation date", "behaviors")."</td><td>";
-      Dropdown::showYesNo("is_ticketdate_locked", $config->fields['is_ticketdate_locked']);
+      Dropdown::showYesNo("is_ticketdate_locked", $config->fields['is_ticketdate_locked']);      
+      echo "</td>";
+
+      echo "<td rowspan='5' colspan='2' class='center'>";
+      Html::textarea(['name'            => 'comment',
+                      'value'           => $config->fields['comment'],
+                      'cols'            => '60',
+                      'rows'            => '12',
+                      'enable_ricktext' => false]);
       echo "</td></tr>";
 
       echo "<tr class='tab_bg_1'>";

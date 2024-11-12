@@ -149,7 +149,7 @@ msgstr "La categoria dell'attività è obbligatoria"
 
 #: inc/config.class.php:373
 msgid "Deny change of ticket's creation date"
-msgstr "Nega la possibilitù di cambiare la data di creazione della chiamata"
+msgstr "Nega la possibilità di cambiare la data di creazione della chiamata"
 
 #: inc/config.class.php:378
 msgid "Protect from simultaneous update"
@@ -235,3 +235,11 @@ msgstr "Impossibile salvare, l'elemento è stato aggiornato"
 #: inc/tickettask.class.php:96
 msgid "You cannot change status of a task in a solved ticket"
 msgstr "Non è possibile modificare lo stato di un'attività in una chiamata risolta"
+
+#: config.class.php:389
+msgid "General"
+msgstr "Generale"
+
+#: config.class.php:399
+msgid "Show Items of child Group"
+msgstr "Mostra gli elementi dei Gruppi Figlio"

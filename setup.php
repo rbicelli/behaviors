@@ -97,6 +97,7 @@ function plugin_init_behaviors() {
 
    $PLUGIN_HOOKS['add_default_where']['behaviors'] = ['PluginBehaviorsConfig', 'add_default_where'];
 
+   $PLUGIN_HOOKS['change_entity']['behaviors'] = ['PluginBehaviorsSession', 'LoadChildGroups'];
 }
 
 
